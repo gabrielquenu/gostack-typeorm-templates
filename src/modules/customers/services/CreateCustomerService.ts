@@ -18,7 +18,9 @@ class CreateCustomerService {
   ) {}
 
   public async execute({ name, email }: IRequest): Promise<Customer> {
-    const checkCustomerExists = this.customersRepository.findByEmail(email);
+    const checkCustomerExists = await this.customersRepository.findByEmail(
+      email,
+    );
 
     if (checkCustomerExists) {
       throw new AppError('E-mail já registrado.');
